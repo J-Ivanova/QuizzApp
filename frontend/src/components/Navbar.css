@@ -1,0 +1,16 @@
+.Navbar {
+  background-color: #218380;
+  width: 100%;
+  padding: 0% 20px;
+  margin: 0;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  flex-direction: row;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  positon: fixed;
+  box-sizing: border-box;
+  color: #F4FFFD;
+}

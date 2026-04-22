@@ -1,0 +1,16 @@
+
+
+{
+  "short_name": "MU Quiz",
+  "name": "MU Sofia Exam Quiz",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#1D9E75",
+  "background_color": "#ffffff",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64"
+    }
+  ]
+}
