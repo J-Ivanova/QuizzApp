@@ -1,6 +1,19 @@
 import { useState } from 'react';
 import './QuestionsBox.css';
 
+function saveResult(config, score, total) {
+  const history = JSON.parse(localStorage.getItem('muquizz_history') || '[]');
+  history.unshift({
+    date: new Date().toLocaleString('bg-BG'),
+    subject: config.subject,
+    difficulty: config.difficulty,
+    score,
+    total,
+    pct: Math.round((score / total) * 100)
+  });
+  localStorage.setItem('muquizz_history', JSON.stringify(history.slice(0, 50)));
+}
+
 export default function QuestionsBox() {
   const [stage, setStage] = useState('setup');
   const [config, setConfig] = useState({
@@ -20,7 +33,7 @@ export default function QuestionsBox() {
     setError(null);
 
     try {
-      const res = await fetch('http://localhost:3001/api/generate-questions', {
+      const res = await fetch('/api/generate-questions', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...config, numq: Number(config.numq) }),
@@ -49,8 +62,12 @@ export default function QuestionsBox() {
 
   function next() {
     setSelected(null);
-    if (idx + 1 >= pool.length) setStage('score');
-    else setIdx(i => i + 1);
+    if (idx + 1 >= pool.length) {
+      saveResult(config, score + (selected === pool[idx]?.answer ? 0 : 0), pool.length);
+      setStage('score');
+    } else {
+      setIdx(i => i + 1);
+    }
   }
 
   const q = pool[idx];
@@ -139,8 +156,6 @@ export default function QuestionsBox() {
   // ── QUIZ ──
   return (
     <div className="QuestionsBox">
-
-      {/* Progress */}
       <div className="progress-header">
         <span className="progress-label">Въпрос {idx + 1} от {pool.length}</span>
         <span className="score-label">★ {score}</span>
@@ -149,15 +164,12 @@ export default function QuestionsBox() {
         <div className="progress-bar-fill" style={{ width: `${pct}%` }} />
       </div>
 
-      {/* Badge */}
       <span className={`badge ${q.subject === 'медицина' ? 'badge-medicine' : q.subject === 'химия' ? 'badge-chemistry' : 'badge-medicine'}`}>
         {q.subject}
       </span>
 
-      {/* Question */}
       <p className="question">{q.q}</p>
 
-      {/* Options */}
       <div className="options-list">
         {q.options.map((o, i) => (
           <button
@@ -176,7 +188,6 @@ export default function QuestionsBox() {
         ))}
       </div>
 
-      {/* Feedback */}
       {selected !== null && (
         <div className={`feedback ${selected === q.answer ? 'correct' : 'wrong'}`}>
           <span className="feedback-icon">{selected === q.answer ? '✓' : '✗'}</span>

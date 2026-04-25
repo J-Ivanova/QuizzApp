@@ -158,3 +158,135 @@
   .navbar-badge { display: none; }
   .hamburger { display: flex; }
 }
+/* ── Modal ── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(65, 34, 52, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  animation: fadeIn 0.2s ease forwards;
+}
+
+.modal-box {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  max-width: 380px;
+  width: 100%;
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+  animation: fadeIn 0.25s ease forwards;
+}
+
+.modal-emoji {
+  font-size: 3rem;
+  margin-bottom: 0.75rem;
+}
+
+.modal-title {
+  color: var(--primary);
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+}
+
+.modal-text {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+.modal-quote {
+  color: var(--primary);
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1.6;
+  margin: 1rem 0 1.5rem;
+  padding: 1rem;
+  background: var(--accent);
+  border-radius: var(--radius-md);
+}
+
+.modal-btn {
+  width: 100%;
+  padding: 0.75rem;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all var(--transition);
+  margin-top: 0.5rem;
+}
+
+.modal-btn:hover {
+  background: var(--primary-light);
+  transform: translateY(-1px);
+}
+
+.modal-btn-secondary {
+  width: 100%;
+  padding: 0.75rem;
+  background: var(--accent);
+  color: var(--primary);
+  border: 1px solid var(--accent-dark);
+  border-radius: var(--radius-md);
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all var(--transition);
+  margin-bottom: 0.5rem;
+}
+
+.modal-btn-secondary:hover {
+  background: var(--accent-dark);
+  transform: translateY(-1px);
+}
+/* ── History ── */
+.history-list {
+  max-height: 280px;
+  overflow-y: auto;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.history-item {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1rem;
+  text-align: left;
+}
+
+.history-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.25rem;
+}
+
+.history-score {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.history-date {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.history-meta {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
